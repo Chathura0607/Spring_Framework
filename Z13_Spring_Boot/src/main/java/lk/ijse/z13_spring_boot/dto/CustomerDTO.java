@@ -1,7 +1,5 @@
 package lk.ijse.z13_spring_boot.dto;
 
-import lombok.*;
-
 public class CustomerDTO {
     private int id;
     private String name;

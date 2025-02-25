@@ -6,20 +6,22 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Customer {
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String address;
+    private double price;
+    private double qty;
 
-    public Customer() {
+    public Item() {
     }
 
-    public Customer(int id, String name, String address) {
+    public Item(int id, String name, double price, double qty) {
         this.id = id;
         this.name = name;
-        this.address = address;
+        this.price = price;
+        this.qty = qty;
     }
 
     public int getId() {
@@ -38,11 +40,27 @@ public class Customer {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public double getPrice() {
+        return price;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getQty() {
+        return qty;
+    }
+
+    public void setQty(double qty) {
+        this.qty = qty;
+    }
+
+    public int getQtyOnHand() {
+        return 0;
+    }
+
+    public void setQtyOnHand(int i) {
+        this.qty = i;
     }
 }
