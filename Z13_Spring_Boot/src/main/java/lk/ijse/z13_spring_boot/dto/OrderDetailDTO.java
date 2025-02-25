@@ -2,13 +2,13 @@ package lk.ijse.z13_spring_boot.dto;
 
 public class OrderDetailDTO {
     private int itemId;
-    private int quantity;
+    private double quantity;
     private double unitPrice;
 
     public OrderDetailDTO() {
     }
 
-    public OrderDetailDTO(int itemId, int quantity, double unitPrice) {
+    public OrderDetailDTO(int itemId, double quantity, double unitPrice) {
         this.itemId = itemId;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
@@ -22,11 +22,11 @@ public class OrderDetailDTO {
         this.itemId = itemId;
     }
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 

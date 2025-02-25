@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
@@ -17,13 +17,13 @@ public class OrderDetail {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    private int quantity;
+    private double quantity;
     private double unitPrice;
 
     public OrderDetail() {
     }
 
-    public OrderDetail(Long id, Order order, Item item, int quantity, double unitPrice) {
+    public OrderDetail(int id, Order order, Item item, double quantity, double unitPrice) {
         this.id = id;
         this.order = order;
         this.item = item;
@@ -31,11 +31,11 @@ public class OrderDetail {
         this.unitPrice = unitPrice;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -55,11 +55,11 @@ public class OrderDetail {
         this.item = item;
     }
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 

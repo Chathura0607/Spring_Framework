@@ -4,7 +4,6 @@ import lk.ijse.z13_spring_boot.dto.CustomerDTO;
 import lk.ijse.z13_spring_boot.service.impl.CustomerServiceImpl;
 import lk.ijse.z13_spring_boot.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,9 +28,8 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseUtil> getCustomerById(@PathVariable int id) {
-        CustomerDTO customerDTO = customerServiceImpl.getById(id);
-        return ResponseEntity.ok(new ResponseUtil(200, "Success", customerDTO));
+    public ResponseUtil getCustomerById(@PathVariable int id) {
+        return new ResponseUtil(200, "Success", customerServiceImpl.getById(id));
     }
 
     @PutMapping(path = "update")

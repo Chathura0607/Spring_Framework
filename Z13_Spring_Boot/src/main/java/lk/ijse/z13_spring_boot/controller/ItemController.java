@@ -4,7 +4,6 @@ import lk.ijse.z13_spring_boot.dto.ItemDTO;
 import lk.ijse.z13_spring_boot.service.impl.ItemServiceImpl;
 import lk.ijse.z13_spring_boot.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,9 +25,8 @@ public class ItemController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseUtil> getItemById(@PathVariable int id) {
-        ItemDTO itemDTO = itemServiceImpl.getById(id);
-        return ResponseEntity.ok(new ResponseUtil(200, "Success", itemDTO));
+    public ResponseUtil getItemById(@PathVariable int id) {
+        return new ResponseUtil(200, "Success", itemServiceImpl.getById(id));
     }
 
     @PutMapping(path = "update")

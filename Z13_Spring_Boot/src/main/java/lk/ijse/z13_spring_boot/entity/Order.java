@@ -2,6 +2,7 @@ package lk.ijse.z13_spring_boot.entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -9,10 +10,10 @@ import java.util.List;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    private String orderDate;
-    private Double totalPrice;
+    private Date orderDate;
+    private double totalPrice;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
@@ -24,7 +25,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, String orderDate, Double totalPrice, Customer customer, List<OrderDetail> orderDetails) {
+    public Order(int id, Date orderDate, double totalPrice, Customer customer, List<OrderDetail> orderDetails) {
         this.id = id;
         this.orderDate = orderDate;
         this.totalPrice = totalPrice;
@@ -32,27 +33,27 @@ public class Order {
         this.orderDetails = orderDetails;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getOrderDate() {
+    public Date getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(String orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 
-    public Double getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Double totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 

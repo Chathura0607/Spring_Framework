@@ -15,9 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,27 +39,19 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public OrderServiceImpl(OrderRepo orderRepo, OrderDetailRepo orderDetailRepo,
-                            CustomerRepo customerRepo, ItemRepo itemRepo, ModelMapper modelMapper) {
-        this.orderRepo = orderRepo;
-        this.orderDetailRepo = orderDetailRepo;
-        this.customerRepo = customerRepo;
-        this.itemRepo = itemRepo;
-        this.modelMapper = modelMapper;
-    }
 
     @Override
     public void placeOrder(OrderDTO orderDTO) {
-        Optional<Customer> optionalCustomer = customerRepo.findById(orderDTO.getCustomerId());
-        Customer customer = optionalCustomer.orElseThrow(() -> new RuntimeException("Customer not found!"));
+        Customer customer = customerRepo.findById(orderDTO.getCustomerId())
+                .orElseThrow(() -> new RuntimeException("Customer not found!"));
 
         Order order = modelMapper.map(orderDTO, Order.class);
         order.setCustomer(customer);
-        order.setOrderDate(LocalDate.now().toString());
+        order.setOrderDate(Date.valueOf(LocalDate.now()));
 
         List<OrderDetail> orderDetailsList = orderDTO.getOrderDetails().stream().map(detailDTO -> {
-            Optional<Item> optionalItem = itemRepo.findById(detailDTO.getItemId());
-            Item item = optionalItem.orElseThrow(() -> new RuntimeException("Item not found!"));
+            Item item = itemRepo.findById(detailDTO.getItemId())
+                    .orElseThrow(() -> new RuntimeException("Item not found!"));
 
             if (item.getQty() < detailDTO.getQuantity()) {
                 throw new RuntimeException("Not enough stock for item: " + item.getName());
@@ -72,12 +64,12 @@ public class OrderServiceImpl implements OrderService {
             OrderDetail orderDetail = modelMapper.map(detailDTO, OrderDetail.class);
             orderDetail.setOrder(order);
             orderDetail.setItem(item);
+
             return orderDetail;
         }).collect(Collectors.toList());
 
         order.setOrderDetails(orderDetailsList);
         orderRepo.save(order);
         orderDetailRepo.saveAll(orderDetailsList);
-
     }
 }

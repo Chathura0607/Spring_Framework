@@ -4,13 +4,13 @@ import java.util.List;
 
 public class OrderDTO {
     private int customerId;
-    private Double totalPrice;
+    private double totalPrice;
     private List<OrderDetailDTO> orderDetails;
 
     public OrderDTO() {
     }
 
-    public OrderDTO(int customerId, Double totalPrice, List<OrderDetailDTO> orderDetails) {
+    public OrderDTO(int customerId, double totalPrice, List<OrderDetailDTO> orderDetails) {
         this.customerId = customerId;
         this.totalPrice = totalPrice;
         this.orderDetails = orderDetails;
@@ -24,11 +24,11 @@ public class OrderDTO {
         this.customerId = customerId;
     }
 
-    public Double getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Double totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
